@@ -11,7 +11,7 @@
   	date = relative
 # pretty git log
 [format]
-	pretty = format:%C(auto,yellow)%h%C(auto,magenta)% G?%C(auto,blue)%>(12,trunc)%ad% C(auto,reset)%s%C(auto,red)% gD% D %C(auto,green)(%<(7,trunc)%aN)
+	pretty = format:%C(auto,yellow)%h%C(auto,magenta)% G? %C(auto,blue)%>(12,trunc)%ad% C(auto,reset)%s%C(auto,red)% gD% D %C(auto,green)(%<(7,trunc)%aN)
 [diff]
 	# Show blocks of moved text of at least 20 alphanumeric characters differently than adds/deletes
 	# https://blog.github.com/2018-04-05-git-217-released/
