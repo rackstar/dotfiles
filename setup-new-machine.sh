@@ -10,7 +10,6 @@
 mkdir -p ~/migration/home/
 mkdir -p ~/migration/Library/"Application Support"/
 mkdir -p ~/migration/Library/Preferences/
-mkdir -p ~/migration/Library/Application Support/
 mkdir -p ~/migration/Library/"Group Containers"
 mkdir -p ~/migration/rootLibrary/Preferences/SystemConfiguration/
 
@@ -37,9 +36,6 @@ cp -Rp ~/Library/Group\ Containers/group.com.apple.notes/ ~/migration/Library/"G
 
 # WiFi
 cp -Rp /Library/Preferences/SystemConfiguration/com.apple.airport.preferences.plist ~/migration/rootLibrary/Preferences/SystemConfiguration/
-
-# automator stuff
-cp -Rp ~/Library/Services ~/migration/Library/
 
 # Fonts
 cp -Rp ~/Library/Fonts ~/migration/Library/
