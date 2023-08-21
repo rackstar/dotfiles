@@ -1,0 +1,65 @@
+[filter "lfs"]
+	clean = git-lfs clean %f
+	smudge = git-lfs smudge %f
+	required = true
+[core]
+	autocrlf = input
+	safecrlf = true
+	editor = vim
+	pager = diff-so-fancy | less --tabs=4 -RFX
+[log]
+  	date = relative
+# pretty git log
+[format]
+	pretty = format:%C(auto,yellow)%h%C(auto,magenta)% G?%C(auto,blue)%>(12,trunc)%ad% C(auto,reset)%s%C(auto,red)% gD% D %C(auto,green)(%<(7,trunc)%aN)
+[diff]
+	# Show blocks of moved text of at least 20 alphanumeric characters differently than adds/deletes
+	# https://blog.github.com/2018-04-05-git-217-released/
+	colorMoved = default
+# push easily. http://stackoverflow.com/a/23918418/89484
+[push]
+	default = current
+	followTags = true
+	autoSetupRemote = true
+[pull]
+	ff = only
+	default = current
+[checkout]
+	defaultRemote = origin
+# use separate file for username / github token / etc
+[include]
+	path = ~/.gitconfig.local
+[stash]
+	showPatch = true
+[alias]
+	co = checkout
+	ci = commit
+	st = status
+	br = branch
+	hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
+	type = cat-file -t
+	dump = cat-file -p
+	unstage = reset HEAD --
+	last = log -1 HEAD
+# use diff-so-fancy whenc diffing
+[interactive]
+	diffFilter = diff-so-fancy --patch
+# setup colors for diff-so-fancy https://github.com/so-fancy/diff-so-fancy
+[color]
+	ui = true
+[color "diff-highlight"]
+	oldNormal = red bold
+	oldHighlight = red bold 52
+	newNormal = green bold
+	newHighlight = green bold 22
+[color "diff"]
+	meta = 11
+	frag = magenta bold
+	func = 146 bold
+	commit = yellow bold
+	old = red bold
+	new = green bold
+	whitespace = red reverse
+# faster git server communication. 
+[protocol]
+	version = 2
