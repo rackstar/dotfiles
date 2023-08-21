@@ -1,0 +1,95 @@
+# copy paste this file in bit by bit.
+# don't run it.
+  echo "do not run this script in one go. hit ctrl-c NOW"
+  read -n 1
+
+
+##############################################################################################################
+###  backup old machine's key items
+
+mkdir -p ~/migration/home/
+mkdir -p ~/migration/Library/"Application Support"/
+mkdir -p ~/migration/Library/Preferences/
+mkdir -p ~/migration/Library/Application Support/
+mkdir -p ~/migration/Library/"Group Containers"
+mkdir -p ~/migration/rootLibrary/Preferences/SystemConfiguration/
+
+cd ~/migration
+
+# what is worth reinstalling?
+npm list -g --depth=0    > npm-g-list.txt
+
+# backup some dotfiles likely not under source control
+cp -Rp \
+    ~/.gitconfig.local \
+    ~/.ssh \
+    ~/.z \
+        ~/migration/home
+
+# Documents
+cp -Rp ~/Documents ~/migration
+
+# Brave Browser
+cp -Rp ~/Library/Application\ Support/BraveSoftware/ ~/migration/Library/"Application Support"
+
+# Notes
+cp -Rp ~/Library/Group\ Containers/group.com.apple.notes/ ~/migration/Library/"Group Containers"
+
+# WiFi
+cp -Rp /Library/Preferences/SystemConfiguration/com.apple.airport.preferences.plist ~/migration/rootLibrary/Preferences/SystemConfiguration/
+
+# automator stuff
+cp -Rp ~/Library/Services ~/migration/Library/
+
+# Fonts
+cp -Rp ~/Library/Fonts ~/migration/Library/
+
+
+# also consider...
+# random git branches you never pushed anywhere?
+# git untracked files (or local gitignored stuff). stuff you never added, but probably want..
+
+
+# OneTab history pages, because chrome tabs are valuable.
+
+# usage logs you've been keeping.
+
+# iTerm settings.
+  # Prefs, General, Use settings from Folder
+
+# maybe ~/Pictures and such
+cp -Rp ~/Pictures ~/migration
+
+### end of old machine backup
+##############################################################################################################
+
+
+##############################################################################################################
+### homebrew
+
+# Create Brewfile
+brew bundle dump
+
+# Install Brewfile in new machine
+brew bundle Brewfile
+
+##############################################################################################################
+
+# go read mathias, paulmillr, gf3, alraa's dotfiles to see what's worth stealing.
+
+sh .macos
+
+##############################################################################################################
+### symlinks to link dotfiles into ~/
+###
+
+#   move git credentials into ~/.gitconfig.local    	http://stackoverflow.com/a/13615531/89484
+#   now .gitconfig can be shared across all machines and only the .local changes
+
+# symlink it up!
+./symlink-setup.sh
+
+# add manual symlink for .ssh/config
+
+###
+##############################################################################################################
