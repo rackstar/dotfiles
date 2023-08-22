@@ -9,18 +9,6 @@ curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.4/install.sh | bash
 
 * [whatsapp silicon](https://web.whatsapp.com/desktop/mac_native/release/)
 
-## VSCode Backup
-
-Backup Extension
-```bash
-code --list-extensions | xargs -L 1 echo code --install-extension > vscode/ext
-```
-
-Backup settings.json
-```bash
-cp ~/Library/Application\ Support/Code/User/settings.json vscode
-```
-
 ## iTerm
 
 * https://medium.com/seokjunhong/customize-the-terminal-zsh-iterm2-powerlevel10k-complete-guide-for-beginners-35c4ba439055
