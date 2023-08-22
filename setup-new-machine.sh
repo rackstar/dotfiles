@@ -3,6 +3,18 @@
   echo "do not run this script in one go. hit ctrl-c NOW"
   read -n 1
 
+## sh setup-new-machine.sh <migration_dir_root_path>
+
+copyMigration() {
+  cp -Rp $1/home/ ~/
+  cp -Rp $1/Library/"Application Support"/ ~/Library/"Application Support"/
+  cp -Rp $1/Library/"Group Containers" ~/Library/"Group Containers"
+  cp -Rp $1/rootLibrary/Preferences/SystemConfiguration/ /Library/Preferences/SystemConfiguration/
+  cp -Rp $1/Library/Fonts/ ~/Library/Fonts/
+  cp -Rp $1/Pictures ~/Pictures
+}
+
+copyMigration
 
 ### end of old machine backup
 ##############################################################################################################
@@ -48,6 +60,25 @@ fi
 
 # Install Brewfile in new machine
 brew bundle Brewfile
+
+##############################################################################################################
+### VSCode
+
+# install extensions
+sh vscode/ext
+
+## symlink vscode/settings.json
+local sourceFile="$(pwd)/vscode/settings.json"
+local targetFile="~/Library/Application\ Support/Code/User/settings.json"
+execute "ln -fs $sourceFile $targetFile" "$targetFile → $sourceFile"
+
+##############################################################################################################
+### hammerspoon
+
+## symlink init.lua
+sourceFile="$(pwd)/hammerspoon/init.lua"
+targetFile="~/.hammerspoon/init.lua"
+execute "ln -fs $sourceFile $targetFile" "$targetFile → $sourceFile"
 
 ##############################################################################################################
 
