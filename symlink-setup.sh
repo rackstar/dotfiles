@@ -187,3 +187,5 @@ main() {
 }
 
 main
+
+# TODO: add symlink for hammerspoon/init.lua
