@@ -1,3 +1,16 @@
+## Backup
+
+backup files that are not symlinked
+```bash
+sh backup.sh
+```
+
+## Setup new machine
+
+```bash
+sh setup-new-machine.sh
+```
+
 ## NVM
 
 * https://github.com/nvm-sh/nvm#install--update-script
