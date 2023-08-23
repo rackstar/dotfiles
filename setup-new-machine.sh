@@ -7,6 +7,7 @@
 
 copyMigration() {
   cp -Rp $1/home/ ~/
+  cp -Rp $1/Documents/ ~/Documents/
   cp -Rp $1/Library/"Application Support"/ ~/Library/"Application Support"/
   cp -Rp $1/Library/"Group Containers" ~/Library/"Group Containers"
   cp -Rp $1/rootLibrary/Preferences/SystemConfiguration/ /Library/Preferences/SystemConfiguration/
@@ -14,13 +15,16 @@ copyMigration() {
   cp -Rp $1/Pictures ~/Pictures
 }
 
-copyMigration
+copyMigration $1
 
 ### end of old machine backup
 ##############################################################################################################
 ##############################################################################################################
 ### XCode Command Line Tools
-#      thx https://github.com/alrra/dotfiles/blob/ff123ca9b9b/os/os_x/installs/install_xcode.sh
+# https://github.com/alrra/dotfiles/blob/ff123ca9b9b/os/os_x/installs/install_xcode.sh
+# edited to only use CommandLineTools instead of the full XCode.app
+
+source './utils.sh'
 
 if ! xcode-select --print-path &> /dev/null; then
 
@@ -42,8 +46,11 @@ if ! xcode-select --print-path &> /dev/null; then
     # the appropriate directory from within `Xcode.app`
     # https://github.com/alrra/dotfiles/issues/13
 
-    sudo xcode-select -switch /Applications/Xcode.app/Contents/Developer
-    print_result $? 'Make "xcode-select" developer directory point to Xcode'
+    sudo xcode-select --switch /Library/Developer/CommandLineTools
+    print_result $? 'Make "xcode-select" developer directory point to CommandLineTools'
+
+    # If you want to use the full Xcode.app
+    # sudo xcode-select -switch /Applications/Xcode.app/Contents/Developer
 
     # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
@@ -55,32 +62,20 @@ if ! xcode-select --print-path &> /dev/null; then
 
 fi
 
+
 ##############################################################################################################
 ### homebrew
 
+# Install Homebrew - https://brew.sh
+echo "Installing Homebrew..."
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)" && echo "Homebrew installed" || echo "Homebrew installation failed"
+# add brew bin to .zprofile and enable it at current session
+(echo; echo 'eval "$(/opt/homebrew/bin/brew shellenv)"') >> /Users/rocky/.zprofile
+eval "$(/opt/homebrew/bin/brew shellenv)"
+echo "Homebrew Installed"
+
 # Install Brewfile in new machine
-brew bundle Brewfile
-
-##############################################################################################################
-### VSCode
-
-# install extensions
-sh vscode/ext
-
-## symlink vscode/settings.json
-local sourceFile="$(pwd)/vscode/settings.json"
-local targetFile="~/Library/Application\ Support/Code/User/settings.json"
-execute "ln -fs $sourceFile $targetFile" "$targetFile → $sourceFile"
-
-##############################################################################################################
-### hammerspoon
-
-## symlink init.lua
-sourceFile="$(pwd)/hammerspoon/init.lua"
-targetFile="~/.hammerspoon/init.lua"
-execute "ln -fs $sourceFile $targetFile" "$targetFile → $sourceFile"
-
-##############################################################################################################
+brew bundle install && echo "Brew bundle installed" || echo "Brew bundle failed"
 
 # go read mathias, paulmillr, gf3, alraa's dotfiles to see what's worth stealing.
 
