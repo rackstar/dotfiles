@@ -5,7 +5,7 @@ local hyper = { '⌘', '⌥', '⌃', '⇧' }
 
 local applicationHotkeys = {
   t = 'iTerm',
-  s = 'Safari ',
+  s = 'Safari',
   b = 'Brave Browser',
   f = 'Finder',
   p = '1Password',
