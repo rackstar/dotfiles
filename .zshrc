@@ -5,10 +5,9 @@
 # Powerlevel10k instant prompt
 # Should stay close to the top of ~/.zshrc. Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
-# FIX: causing parse error
-# if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-#   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-# fi
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
 
 # Powerlevel10k
 source $(brew --prefix)/opt/powerlevel10k/powerlevel10k.zsh-theme
@@ -16,19 +15,17 @@ source $(brew --prefix)/opt/powerlevel10k/powerlevel10k.zsh-theme
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 # Plugins
-# FIX: causing parse error
-# source $HOMEBREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-# source $HOMEBREW_PREFIX/opt/zsh-fast-syntax-highlighting/share/zsh-fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
+source $HOMEBREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+source $HOMEBREW_PREFIX/opt/zsh-fast-syntax-highlighting/share/zsh-fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
 
 # ----------------------------------------------------------------------
 # | Bin                                                                |
 # ----------------------------------------------------------------------
 
 # NVM
-# FIX: causing parse error
-# export NVM_DIR="$HOME/.nvm"
-# [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-# [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 # Go
 export GOPATH=$HOME/go
@@ -41,11 +38,31 @@ export PATH="$PATH:${GOPATH}/bin:${GOROOT}/bin"
 # Brew
 eval "$(/opt/homebrew/bin/brew shellenv)"
 
+# FZF
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# use fd instead of find
+export FZF_DEFAULT_COMMAND='fd --type f --strip-cwd-prefix --hidden --follow --exclude .git'
+export FZF_DEFAULT_OPTS='--height 40% --layout=reverse'
+# CTRL-/ to toggle small preview window to see the full command
+# CTRL-Y to copy the command into clipboard using pbcopy
+export FZF_CTRL_R_OPTS="
+  --preview 'echo {}' --preview-window up:3:hidden:wrap
+  --bind 'ctrl-/:toggle-preview'
+  --bind 'ctrl-y:execute-silent(echo -n {2..} | pbcopy)+abort'
+  --color header:italic
+  --header 'Press CTRL-Y to copy command into clipboard'"
+
+# zoxide
+eval "$(zoxide init zsh)"
+
 # ----------------------------------------------------------------------
 # | Aliases                                                            |
 # ----------------------------------------------------------------------
 
 # Files
+alias cd="z"
 alias ls="exa"
 alias cat="bat"
 alias ll="exa -ahl"
@@ -53,6 +70,7 @@ alias tree="exa --tree"
 alias find="fd"
 
 # Neovim
+alias v="nvim"
 alias vi="nvim"
 alias vim="nvim"
 
@@ -62,10 +80,10 @@ alias rezsh="source ~/.zshrc"
 alias grep="grep --color=auto"
 
 # Foundry
-alias fi="forge install"
+alias f="forge"
+alias fint="forge install"
 alias fb="forge build"
 alias ft="forge test"
-alias finit="forge init"
 
 # Navigation
 alias de="cd ~/Desktop"
@@ -155,7 +173,6 @@ alias hideFiles="defaults write com.apple.finder AppleShowAllFiles NO; killall F
 alias brew_update="brew -v update && brew upgrade --force-bottle --cleanup && brew cleanup && brew cask cleanup && brew prune && brew doctor && npm-check -g -u"
 alias update_brew_npm="brew_update && npm install npm -g && npm update -g"
 
-
 # ----------------------------------------------------------------------
 # | Helper Functions                                                   |
 # ----------------------------------------------------------------------
@@ -172,14 +189,15 @@ tcode() {
   code "$1"
 }
 
-# killf() {
-#   set -e
-#   if ps -ef | sed 1d | fzf -m | awk '{print $2}' > $TMPDIR/fzf.result
-#   then
-#     kill -9 (cat $TMPDIR/fzf.result)
-#     # echo (cat $TMPDIR/fzf.result)
-#   fi
-# }
+killf() {
+  set -e
+  if ps -ef | sed 1d | fzf -m | awk '{print $2}' > $TMPDIR/fzf.result
+  then
+    # kill -9 (cat $TMPDIR/fzf.result)
+    echo (cat $TMPDIR/fzf.result)
+    echo "TEST - no kill (edit me)"
+  fi
+}
 
 clone() {
   git clone $@
@@ -187,7 +205,7 @@ clone() {
   pnpm install
 }
 
-# # Use `which` along with symlink resolving
+# Use `which` along with symlink resolving
 whichlink() {
   $(type -p greadlink readlink | head -1) -f $(which $@)
 }
