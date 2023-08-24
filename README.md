@@ -76,6 +76,19 @@ Run `foundryup` to install foundry
 ```bash
 foundryup
 ```
+## fzf-tab
+
+Clone repo
+```bash
+mkdir ~/.zsh_plugins
+git clone https://github.com/Aloxaf/fzf-tab ~/.zsh_plugins/fzf-tab
+```
+
+Add to .zshrc (should be there already)
+```bash
+source ~/.zshplugins/fzf-tab/fzf-tab.plugin.zsh
+```
+
 ## MacOS
 
 * System Preferences > Security & Privacy > Firewall > Turn on Firewall

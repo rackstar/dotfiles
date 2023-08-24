@@ -15,6 +15,8 @@ source $(brew --prefix)/opt/powerlevel10k/powerlevel10k.zsh-theme
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 # Plugins
+# TODO: fix fzf-tab
+source $HOME/.zsh_plugins/fzf-tab/fzf-tab.plugin.zsh
 source $HOMEBREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 source $HOMEBREW_PREFIX/opt/zsh-fast-syntax-highlighting/share/zsh-fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
 
@@ -42,35 +44,47 @@ eval "$(/opt/homebrew/bin/brew shellenv)"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-# use fd instead of find
-export FZF_DEFAULT_COMMAND="fd --type f --strip-cwd-prefix --hidden --follow --exclude .git"
+FD_OPTIONS="--hidden --follow --exclude .git --exclude node_modules"
+
 # ? - toggle preview
 # CTRL-A - select all entries
 # CTRL-Y - copy the selected entries to the clipboard
 # CTRL-E - open the selected entries in vim
 # CTRL-V - open the selected entries in VSCode
 export FZF_DEFAULT_OPTS="
+    --no-mouse
     --height 40%
     --layout=reverse
     --multi
+    --inline-info
     --preview '([[ -f {} ]] && (bat --style=numbers --color=always {} || cat {})) || ([[ -d {} ]] && (tree -C {} | less)) || echo {} 2> /dev/null | head -200'
     --color='hl:148,hl+:154,pointer:032,marker:010,bg+:237,gutter:008'
     --prompt='∼ ' --pointer='▶' --marker='✓'
     --bind '?:toggle-preview'
-    --bind 'ctrl-a:select-all'
+    --bind 'ctrl-d:half-page-down'
+    --bind 'ctrl-u:half-page-up'
+    --bind 'ctrl-a:select-all+accept'
     --bind 'ctrl-y:execute-silent(echo {+} | pbcopy)'
-    --bind 'ctrl-e:execute(echo {+} | xargs -o vim)'
+    --bind 'ctrl-e:become(vim {1} +{2})'
     --bind 'ctrl-v:execute(code {+})'
 "
+
+# TODO: fix error - Vim: Warning: Output is not to a terminal
+# --bind 'ctrl-e:execute(echo {+} | xargs -o vim)'
+# --bind 'ctrl-e:become(vim {1} +{2})'
+
+# Use git ls-files inside git repo, otherwise fd
+export FZF_DEFAULT_COMMAND="git ls-files --cached --others --exclude-standard | fd --type f --strip-cwd-prefix $FD_OPTIONS"
+export FZF_CTRL_T_COMMAND="fd $FD_OPTIONS"
+export FZF_ALT_C_COMMAND="fd --type d $FD_OPTIONS"
 # CTRL-/ to toggle small preview window to see the full command
 # CTRL-Y to copy the command into clipboard using pbcopy
 export FZF_CTRL_R_OPTS="
   --preview 'echo {}' --preview-window up:3:hidden:wrap
-  --bind '?:toggle-preview'
-  --bind 'ctrl-y:execute-silent(echo -n {2..} | pbcopy)+abort'
   --color header:italic
-  --header 'Press CTRL-Y to copy command into clipboard'
 "
+# Print tree structure in the preview window
+export FZF_ALT_C_OPTS="--preview 'exa --tree {}'"
 
 # zoxide
 eval "$(zoxide init zsh)"
@@ -124,7 +138,7 @@ alias gca="g commit -v -a"
 alias gcms="g commit -m"
 alias gd="g diff"
 alias gdc="g diff --cached"
-alias gcl="g clone"
+alias gcl="clone"
 alias gra="g remote add"
 alias gp="g push"
 alias gpo="g push origin"
@@ -134,6 +148,7 @@ alias grs="g reset"
 alias grv="g revert"
 alias gm="g merge"
 alias gco="g checkout"
+alias gcof="gba | fzf | xargs git checkout"
 alias gcob="g checkout -b"
 alias gcot="g checkout -t"
 alias gcotr="g checkout --track -b"
@@ -196,7 +211,7 @@ alias update_brew_npm="brew_update && npm install npm -g && npm update -g"
 # ----------------------------------------------------------------------
 
 # combine mkdir and cd
-md() {
+mkcd() {
   mkdir "$1"
   cd "$1"
 }
@@ -207,20 +222,29 @@ tcode() {
   code "$1"
 }
 
+# kill with fzf
 killf() {
-  set -e
-  if ps -ef | sed 1d | fzf -m | awk '{print $2}' > $TMPDIR/fzf.result
-  then
-    # kill -9 (cat $TMPDIR/fzf.result)
-    echo (cat $TMPDIR/fzf.result)
-    echo "TEST - no kill (edit me)"
+  local pid
+  if [[ "${UID}" != "0" ]]; then
+    pid=$(ps -f -u ${UID} | sed 1d | fzf -m | awk '{print $2}')
+    echo $pid 1
+  else
+    pid=$(ps -ef | sed 1d | fzf -m | awk '{print $2}')
+    echo $pid 2
+  fi
+
+  if [[ "x$pid" != "x" ]]; then
+    echo $pid 3 | xargs kill "-${1:-9}"
   fi
 }
 
+# clone with install
 clone() {
   git clone $@
-  cd (basename $2 | sed 's/.git$//')
-  pnpm install
+  cd $(basename $1 | sed 's/.git$//')
+  if [[ -f package.json ]]; then
+    pnpm install
+  fi
 }
 
 # Use `which` along with symlink resolving
