@@ -28,4 +28,5 @@
   "typescript.updateImportsOnFileMove.enabled": "always",
   "editor.fontFamily": "Fira Code, Menlo, Monaco, 'Courier New', monospace",
   "editor.fontLigatures": true,
+  "editor.tabSize": 2,
 }
