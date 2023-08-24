@@ -43,16 +43,34 @@ eval "$(/opt/homebrew/bin/brew shellenv)"
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # use fd instead of find
-export FZF_DEFAULT_COMMAND='fd --type f --strip-cwd-prefix --hidden --follow --exclude .git'
-export FZF_DEFAULT_OPTS='--height 40% --layout=reverse'
+export FZF_DEFAULT_COMMAND="fd --type f --strip-cwd-prefix --hidden --follow --exclude .git"
+# ? - toggle preview
+# CTRL-A - select all entries
+# CTRL-Y - copy the selected entries to the clipboard
+# CTRL-E - open the selected entries in vim
+# CTRL-V - open the selected entries in VSCode
+export FZF_DEFAULT_OPTS="
+    --height 40%
+    --layout=reverse
+    --multi
+    --preview '([[ -f {} ]] && (bat --style=numbers --color=always {} || cat {})) || ([[ -d {} ]] && (tree -C {} | less)) || echo {} 2> /dev/null | head -200'
+    --color='hl:148,hl+:154,pointer:032,marker:010,bg+:237,gutter:008'
+    --prompt='∼ ' --pointer='▶' --marker='✓'
+    --bind '?:toggle-preview'
+    --bind 'ctrl-a:select-all'
+    --bind 'ctrl-y:execute-silent(echo {+} | pbcopy)'
+    --bind 'ctrl-e:execute(echo {+} | xargs -o vim)'
+    --bind 'ctrl-v:execute(code {+})'
+"
 # CTRL-/ to toggle small preview window to see the full command
 # CTRL-Y to copy the command into clipboard using pbcopy
 export FZF_CTRL_R_OPTS="
   --preview 'echo {}' --preview-window up:3:hidden:wrap
-  --bind 'ctrl-/:toggle-preview'
+  --bind '?:toggle-preview'
   --bind 'ctrl-y:execute-silent(echo -n {2..} | pbcopy)+abort'
   --color header:italic
-  --header 'Press CTRL-Y to copy command into clipboard'"
+  --header 'Press CTRL-Y to copy command into clipboard'
+"
 
 # zoxide
 eval "$(zoxide init zsh)"
