@@ -9,7 +9,7 @@ copyMigration() {
   cp -Rp $1/home/ ~/
   cp -Rp $1/Documents/ ~/Documents/
   cp -Rp $1/Library/"Application Support"/ ~/Library/"Application Support"/
-  cp -Rp $1/Library/"Group Containers" ~/Library/"Group Containers"
+  cp -Rp $1/Library/"Group Containers"/ ~/Library/"Group Containers"/
   cp -Rp $1/rootLibrary/Preferences/SystemConfiguration/ /Library/Preferences/SystemConfiguration/
   cp -Rp $1/Library/Fonts/ ~/Library/Fonts/
   cp -Rp $1/Pictures ~/Pictures
