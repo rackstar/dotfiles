@@ -15,8 +15,7 @@ source $(brew --prefix)/opt/powerlevel10k/powerlevel10k.zsh-theme
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 # Plugins
-# TODO: fix fzf-tab
-source $HOME/.zsh_plugins/fzf-tab/fzf-tab.plugin.zsh
+source $HOME/.zsh_plugins/fzf-tab/fzf-tab.plugin.zsh # TODO: fix fzf-tab
 source $HOMEBREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 source $HOMEBREW_PREFIX/opt/zsh-fast-syntax-highlighting/share/zsh-fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
 
@@ -97,6 +96,7 @@ eval "$(zoxide init zsh)"
 alias cd="z"
 alias ls="exa"
 alias cat="bat"
+alias less="bat"
 alias ll="exa -ahl"
 alias tree="exa --tree"
 alias find="fd"
