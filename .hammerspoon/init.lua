@@ -161,3 +161,12 @@ local cmdOptionHotKeys = {
 for i, mapping in ipairs(cmdOptionHotKeys) do
   hs.hotkey.bind(mapping[1], mapping[2], mapping[3])
 end
+
+-- The below code automatically reloads this hammer configuration file
+-- whenever a file in the ~/.hammerspoon directory is changed
+-- Shows the alert "Config reloaded", whenever it does
+-- uncomment this code when debugging.
+
+-- hs.loadSpoon('ReloadConfiguration')
+-- spoon.ReloadConfiguration:start()
+-- hs.alert.show('Config reloaded')
