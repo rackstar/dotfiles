@@ -24,10 +24,10 @@ cp -Rp \
 cp -Rp ~/Documents ~/migration
 
 # Brave Browser
-cp -Rp ~/Library/Application\ Support/BraveSoftware/ ~/migration/Library/"Application Support"
+cp -Rp ~/Library/Application\ Support/BraveSoftware ~/migration/Library/"Application Support"
 
 # Notes
-cp -Rp ~/Library/Group\ Containers/group.com.apple.notes/ ~/migration/Library/"Group Containers"
+cp -Rp ~/Library/Group\ Containers/group.com.apple.notes ~/migration/Library/"Group Containers"
 
 # WiFi
 cp -Rp /Library/Preferences/SystemConfiguration/com.apple.airport.preferences.plist ~/migration/rootLibrary/Preferences/SystemConfiguration/
