@@ -1127,6 +1127,16 @@ defaults write com.apple.commerce AutoUpdate -bool true
 defaults write com.apple.commerce AutoUpdateRestartRequired -bool true
 
 ###############################################################################
+# Menu Bar                                                                    #
+###############################################################################
+
+# Shrink menu bar spacing
+defaults -currentHost write -globalDomain NSStatusItemSpacing -int 12
+
+# Shrink menu bar padding
+defaults -currentHost write -globalDomain NSStatusItemSelectionPadding -int 8
+
+###############################################################################
 # Photos                                                                      #
 ###############################################################################
 
