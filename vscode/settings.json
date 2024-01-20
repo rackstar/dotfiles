@@ -1,5 +1,8 @@
 {
   "workbench.iconTheme": "material-icon-theme",
+  "[solidity]": {
+    "editor.defaultFormatter": "JuanBlanco.solidity"
+  },
   "[typescript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
@@ -9,24 +12,35 @@
   "[javascript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
-  "editor.minimap.enabled": false,
-  "files.autoSave": "onFocusChange",
   "[vue]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
-  "redhat.telemetry.enabled": false,
-  "[yaml]": {
-    "editor.defaultFormatter": "redhat.vscode-yaml"
-  },
-  "workbench.colorTheme": "Material Theme",
-  "editor.rulers": [
-    120
-  ],
   "[jsonc]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
+  "[yaml]": {
+    "editor.defaultFormatter": "redhat.vscode-yaml"
+  },
+  "editor.minimap.enabled": false,
+  "files.autoSave": "onFocusChange",
+  "redhat.telemetry.enabled": false,
+  "editor.rulers": [120],
   "typescript.updateImportsOnFileMove.enabled": "always",
   "editor.fontFamily": "Fira Code, Menlo, Monaco, 'Courier New', monospace",
   "editor.fontLigatures": true,
   "editor.tabSize": 2,
+  "javascript.updateImportsOnFileMove.enabled": "always",
+  "extensions.experimental.affinity": {
+    "asvetliakov.vscode-neovim": 1
+  },
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "workbench.colorTheme": "Material Theme",
+  "solidity.monoRepoSupport": false,
+  "solidity.telemetry": false,
+  "tabnine.experimentalAutoImports": true,
+  "diffEditor.ignoreTrimWhitespace": false,
+  "explorer.confirmDragAndDrop": false,
+  "githubPullRequests.pullBranch": "never",
+  "editor.accessibilitySupport": "off"
 }
