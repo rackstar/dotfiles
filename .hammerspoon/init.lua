@@ -12,14 +12,15 @@ local applicationHotkeys = {
   l = 'Slack',
   v = 'Visual Studio Code',
   i = 'Viber',
-  c = 'Calendar',
+  c = 'Claude',
+  g = 'ChatGPT',
   n = 'Notes',
-  a = 'Authy Desktop',
   r = 'RescueTime',
   w = 'WhatsApp',
-  d = 'Obsidian',
+  d = 'Calendar',
   e = 'Telegram',
   o = 'Ferdium',
+  z = 'zoom.us.app',
 }
 
 for key, app in pairs(applicationHotkeys) do
