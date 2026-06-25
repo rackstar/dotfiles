@@ -1,5 +1,8 @@
 # https://github.com/github/gitignore
 
+# Git local config (private: name, email, signing key, credentials)
+.gitconfig.local
+
 # ----------------------------------------------------------------------
 # | OS X                                                               |
 # ----------------------------------------------------------------------
