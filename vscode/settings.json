@@ -1,7 +1,7 @@
 {
   "workbench.iconTheme": "material-icon-theme",
   "[solidity]": {
-    "editor.defaultFormatter": "JuanBlanco.solidity"
+    "editor.defaultFormatter": "NomicFoundation.hardhat-solidity"
   },
   "[typescript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
@@ -33,14 +33,25 @@
   "extensions.experimental.affinity": {
     "asvetliakov.vscode-neovim": 1
   },
-  "editor.formatOnSave": true,
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "workbench.colorTheme": "Material Theme",
-  "solidity.monoRepoSupport": false,
   "solidity.telemetry": false,
   "tabnine.experimentalAutoImports": true,
   "diffEditor.ignoreTrimWhitespace": false,
   "explorer.confirmDragAndDrop": false,
   "githubPullRequests.pullBranch": "never",
-  "editor.accessibilitySupport": "off"
+  "editor.accessibilitySupport": "off",
+  "githubPullRequests.terminalLinksHandler": "github",
+  // "editor.codeActionsOnSave": {
+  //   "source.fixAll": "explicit"
+  // },
+  "eslint.validate": [
+    "javascript",
+    "typescript"
+  ],
+  "files.associations": {
+    "api": "nginx"
+  },
+  "task.allowAutomaticTasks": "off",
+  "claudeCode.preferredLocation": "sidebar"
 }
