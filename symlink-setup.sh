@@ -49,8 +49,17 @@ main
 
 ## Other files (settings.json, init.lua etc..)
 
-# symlink VSCode settings.json 
+# symlink VSCode settings.json
 sym_link "$(pwd)/vscode/settings.json" "~/Library/Application\ Support/Code/User/settings.json"
+
+# symlink VSCode keybindings.json
+sym_link "$(pwd)/vscode/keybindings.json" "~/Library/Application\ Support/Code/User/keybindings.json"
+
+# symlink Cursor settings.json
+sym_link "$(pwd)/cursor/settings.json" "~/Library/Application\ Support/Cursor/User/settings.json"
+
+# symlink Cursor keybindings.json
+sym_link "$(pwd)/cursor/keybindings.json" "~/Library/Application\ Support/Cursor/User/keybindings.json"
 
 # symlink hammerspoon/init.lua
 sym_link "$(pwd)/.hammerspoon/init.lua" "~/.hammerspoon/init.lua"
