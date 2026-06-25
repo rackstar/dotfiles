@@ -1,0 +1,84 @@
+{
+    "workbench.iconTheme": "material-icon-theme",
+    "[solidity]": {
+        "editor.defaultFormatter": "NomicFoundation.hardhat-solidity"
+    },
+    "[typescript]": {
+        "editor.defaultFormatter": "vscode.typescript-language-features"
+    },
+    "[json]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[javascript]": {
+        "editor.defaultFormatter": "vscode.typescript-language-features"
+    },
+    "[vue]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[jsonc]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[yaml]": {
+        "editor.defaultFormatter": "redhat.vscode-yaml"
+    },
+    "[dockercompose]": {
+        "editor.insertSpaces": true,
+        "editor.tabSize": 2,
+        "editor.autoIndent": "advanced",
+        "editor.defaultFormatter": "redhat.vscode-yaml"
+    },
+    "[github-actions-workflow]": {
+        "editor.defaultFormatter": "redhat.vscode-yaml"
+    },
+    "editor.minimap.enabled": false,
+    "editor.rulers": [120],
+    "editor.fontFamily": "Fira Code, Menlo, Monaco, 'Courier New', monospace",
+    "editor.fontLigatures": true,
+    "editor.tabSize": 2,
+    "editor.fontSize": 11,
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.accessibilitySupport": "off",
+    "files.autoSave": "onFocusChange",
+    "files.trimTrailingWhitespace": true,
+    "files.associations": {
+        "api": "nginx"
+    },
+    "workbench.colorTheme": "Material Theme",
+    "workbench.activityBar.orientation": "vertical",
+    "workbench.statusBar.visible": false,
+    "window.autoDetectColorScheme": false,
+    "extensions.experimental.affinity": {
+        "asvetliakov.vscode-neovim": 1
+    },
+    "extensions.ignoreRecommendations": true,
+    "typescript.updateImportsOnFileMove.enabled": "always",
+    "javascript.updateImportsOnFileMove.enabled": "always",
+    "js/ts.implicitProjectConfig.checkJs": true,
+    "eslint.validate": ["javascript", "typescript"],
+    "diffEditor.ignoreTrimWhitespace": false,
+    "explorer.confirmDragAndDrop": false,
+    "githubPullRequests.pullBranch": "never",
+    "githubPullRequests.terminalLinksHandler": "github",
+    "gitlens.home.preview.enabled": false,
+    "redhat.telemetry.enabled": false,
+    "solidity.telemetry": false,
+    "tabnine.experimentalAutoImports": true,
+    "vscode-neovim.neovimExecutablePaths.darwin": "/opt/homebrew/bin/nvim",
+    "task.allowAutomaticTasks": "off",
+    "terminal.integrated.scrollback": 2000,
+    "cursor.cpp.disabledLanguages": [
+        "markdown",
+        "plaintext",
+        ".env",
+        "*.env",
+        "*.env*",
+        "untitled",
+        "scminput"
+    ],
+    "cursor.terminal.usePreviewBox": true,
+    "claudeCode.preferredLocation": "panel",
+    "remote.SSH.configFile": "~/.ssh/config",
+    "remote.SSH.remotePlatform": {
+        "nxmp-fork-he": "linux"
+    }
+}
