@@ -9,13 +9,16 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
+eval "$(/opt/homebrew/bin/brew shellenv)"
+
 # Powerlevel10k
-source $(brew --prefix)/opt/powerlevel10k/powerlevel10k.zsh-theme
+source $HOMEBREW_PREFIX/opt/powerlevel10k/powerlevel10k.zsh-theme
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 # Plugins
-source $HOME/.zsh_plugins/fzf-tab/fzf-tab.plugin.zsh # TODO: fix fzf-tab
+autoload -Uz compinit && compinit
+source $HOME/.zsh_plugins/fzf-tab/fzf-tab.plugin.zsh
 source $HOMEBREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 source $HOMEBREW_PREFIX/opt/zsh-fast-syntax-highlighting/share/zsh-fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
 
@@ -23,21 +26,22 @@ source $HOMEBREW_PREFIX/opt/zsh-fast-syntax-highlighting/share/zsh-fast-syntax-h
 # | Bin                                                                |
 # ----------------------------------------------------------------------
 
-# NVM
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+# Brew
+alias bs="brew services"
+alias bss="bs start"
+alias bsp="bs stop"
+alias bsr="bs restart"
 
 # Go
 export GOPATH=$HOME/go
-export GOROOT="$(brew --prefix golang)/libexec"
+export GOROOT="/opt/homebrew/opt/golang/libexec"
 export PATH="$PATH:${GOPATH}/bin:${GOROOT}/bin"
+
+# fnm
+eval "$(fnm env --use-on-cd --shell zsh)"
 
 # Rust
 . "$HOME/.cargo/env"
-
-# Brew
-eval "$(/opt/homebrew/bin/brew shellenv)"
 
 # FZF
 
@@ -88,6 +92,9 @@ export FZF_ALT_C_OPTS="--preview 'exa --tree {}'"
 # zoxide
 eval "$(zoxide init zsh)"
 
+export EDITOR="/usr/local/bin/cursor"
+export GIT_EDITOR="vim"
+
 # ----------------------------------------------------------------------
 # | Aliases                                                            |
 # ----------------------------------------------------------------------
@@ -100,6 +107,7 @@ alias less="bat"
 alias ll="exa -ahl"
 alias tree="exa --tree"
 alias find="fd"
+alias rp="realpath"
 
 # Neovim
 alias v="nvim"
@@ -117,6 +125,12 @@ alias fint="forge install"
 alias fb="forge build"
 alias ft="forge test"
 
+# IDE
+alias c="cursor"
+alias cur="cursor"
+alias vc="code"
+alias vcode="code"
+
 # Navigation
 alias de="cd ~/Desktop"
 alias ds="cd ~/Documents"
@@ -130,6 +144,7 @@ alias .....="cd ../../../.."
 alias g="git"
 alias gs="g status"
 alias ga="g add"
+alias gac="g add -p"
 alias gb="g branch"
 alias gba="g branch -a"
 alias gbls="g for-each-ref --sort=committerdate refs/heads/ --format='%(HEAD) %(color:yellow)%(refname:short)%(color:reset) - %(color:red)%(objectname:short)%(color:reset) - %(contents:subject) - %(authorname) (%(color:green)%(committerdate:relative)%(color:reset))'"
@@ -141,26 +156,34 @@ alias gdc="g diff --cached"
 alias gcl="clone"
 alias gra="g remote add"
 alias gp="g push"
+alias gpf="gp --force-with-lease"
 alias gpo="g push origin"
 alias gu="g pull"
 alias gur="g pull --rebase"
+alias gua='git pull --rebase --autostash'
 alias grs="g reset"
 alias grv="g revert"
 alias gm="g merge"
+alias gmff='g merge --ff-only'
 alias gco="g checkout"
 alias gcof="gba | fzf | xargs git checkout"
 alias gcob="g checkout -b"
 alias gcot="g checkout -t"
 alias gcotr="g checkout --track -b"
 alias gl="g log"
-alias gh="g hist"
-alias gur="g pull --rebase"
+alias ghst="g hist"
 alias gsh="g stash"
 alias gsa="g stash apply"
 alias gsp="g stash pop"
+alias grb="g rebase"
 alias grbc="g rebase --continue"
 alias grbk="g rebase --skip"
 alias gcp="g cherry-pick"
+alias gcpc="g cherry-pick --continue"
+alias gcpk="g cherry-pick --skip"
+alias gt="g tag"
+alias gtref="git show-ref --tags"
+alias gtlr="git ls-remote --tags"
 
 # mv, rm, cp
 alias rm="rm -v"
@@ -193,17 +216,36 @@ alias ni="n install"
 alias ns="n start"
 alias nt="n test"
 alias nr="n run"
+alias nv="n version"
+alias np="nv patch"
+
+# Hardhat
+alias ht="npx hardhat test"
+alias hr="npx hardhat run"
+alias hcl="npx hardhat clean"
+alias hco="ENABLE_OPTIMIZER=true npx hardhat compile"
+alias hcc="hcl && hco"
 
 # curl
 alias cpj="curl -H 'Content-Type: application/json' -X POST -d"
 alias cgj="curl -i -H 'Accept: application/json' -H 'Content-Type: application/json' -X GET"
+
+# mongodb
+alias mongo_start="bss mongodb-community"
+alias mongo_stop="bsp mongodb-community"
+alias mongo_restart="bsr mongodb-community"
+
+# postgresql
+alias postgres_start="bss postgresql"
+alias postgres_stop="bsp postgresql"
+alias postgres_restart="bsr postgresql"
 
 # OSX Files
 alias showFiles="defaults write com.apple.finder AppleShowAllFiles YES; killall Finder /System/Library/CoreServices/Finder.app"
 alias hideFiles="defaults write com.apple.finder AppleShowAllFiles NO; killall Finder /System/Library/CoreServices/Finder.app"
 
 # Brew / NPM Update
-alias brew_update="brew -v update && brew upgrade --force-bottle --cleanup && brew cleanup && brew cask cleanup && brew prune && brew doctor && npm-check -g -u"
+alias brew_update="brew -v update && brew upgrade --force-bottle --cleanup && brew cleanup && brew doctor && npm-check -g -u"
 alias update_brew_npm="brew_update && npm install npm -g && npm update -g"
 
 # ----------------------------------------------------------------------
@@ -251,3 +293,18 @@ clone() {
 whichlink() {
   $(type -p greadlink readlink | head -1) -f $(which $@)
 }
+
+# Nexus Mutual
+export PRE_PUSH_RUN_TEST=true
+
+# bun completions
+[ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
+
+# >>> spawn >>>
+export PATH="$HOME/.local/bin:$PATH"
+# <<< spawn <<<
+
+# >>> spawn >>>
+export PATH="$HOME/.bun/bin:$PATH"
+# <<< spawn <<<
+source $HOME/.config/op/plugins.sh
