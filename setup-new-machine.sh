@@ -70,12 +70,17 @@ fi
 echo "Installing Homebrew..."
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)" && echo "Homebrew installed" || echo "Homebrew installation failed"
 # add brew bin to .zprofile and enable it at current session
-(echo; echo 'eval "$(/opt/homebrew/bin/brew shellenv)"') >> /Users/rocky/.zprofile
+(echo; echo 'eval "$(/opt/homebrew/bin/brew shellenv)"') >> $HOME/.zprofile
 eval "$(/opt/homebrew/bin/brew shellenv)"
 echo "Homebrew Installed"
 
 # Install Brewfile in new machine
 brew bundle install && echo "Brew bundle installed" || echo "Brew bundle failed"
+
+# Install node via fnm
+fnm install 22
+fnm default 22
+npm install -g pnpm
 
 # go read mathias, paulmillr, gf3, alraa's dotfiles to see what's worth stealing.
 
@@ -90,6 +95,9 @@ sh .macos
 
 # symlink it up!
 ./symlink-setup.sh
+
+# Clone Claude config
+gh repo clone git@github.com:rackstar/dotclaude.git ~/.claude
 
 # add manual symlink for .ssh/config
 
