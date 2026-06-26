@@ -72,12 +72,8 @@ export FZF_DEFAULT_OPTS="
     --bind 'ctrl-v:execute(code {+})'
 "
 
-# TODO: fix error - Vim: Warning: Output is not to a terminal
-# --bind 'ctrl-e:execute(echo {+} | xargs -o vim)'
-# --bind 'ctrl-e:become(vim {1} +{2})'
-
 # Use git ls-files inside git repo, otherwise fd
-export FZF_DEFAULT_COMMAND="git ls-files --cached --others --exclude-standard | fd --type f --strip-cwd-prefix $FD_OPTIONS"
+export FZF_DEFAULT_COMMAND="git ls-files --cached --others --exclude-standard 2>/dev/null || fd --type f --strip-cwd-prefix $FD_OPTIONS"
 export FZF_CTRL_T_COMMAND="fd $FD_OPTIONS"
 export FZF_ALT_C_COMMAND="fd --type d $FD_OPTIONS"
 # CTRL-/ to toggle small preview window to see the full command
@@ -87,12 +83,12 @@ export FZF_CTRL_R_OPTS="
   --color header:italic
 "
 # Print tree structure in the preview window
-export FZF_ALT_C_OPTS="--preview 'exa --tree {}'"
+export FZF_ALT_C_OPTS="--preview 'eza --tree {}'"
 
 # zoxide
 eval "$(zoxide init zsh)"
 
-export EDITOR="/usr/local/bin/cursor"
+export EDITOR="code"
 export GIT_EDITOR="vim"
 
 # ----------------------------------------------------------------------
@@ -101,11 +97,11 @@ export GIT_EDITOR="vim"
 
 # Files
 alias cd="z"
-alias ls="exa"
+alias ls="eza"
 alias cat="bat"
 alias less="bat"
-alias ll="exa -ahl"
-alias tree="exa --tree"
+alias ll="eza -ahl"
+alias tree="eza --tree"
 alias find="fd"
 alias rp="realpath"
 
@@ -189,9 +185,8 @@ alias gtlr="git ls-remote --tags"
 alias rm="rm -v"
 #             └─ verbose, showing files as they are removed
 
-alias cp="cp -iv"
-#             │└─ list copied files
-#             └─ prompt before overwriting an existing file
+alias cp="cp -v"
+#             └─ list copied files
 
 alias mkdir="mkdir -pv"
 #                   │└─ list created directories
@@ -297,14 +292,8 @@ whichlink() {
 # Nexus Mutual
 export PRE_PUSH_RUN_TEST=true
 
-# bun completions
-[ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
-
 # >>> spawn >>>
 export PATH="$HOME/.local/bin:$PATH"
 # <<< spawn <<<
 
-# >>> spawn >>>
-export PATH="$HOME/.bun/bin:$PATH"
-# <<< spawn <<<
 source $HOME/.config/op/plugins.sh
