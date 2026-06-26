@@ -25,8 +25,6 @@ brew "coreutils"
 brew "diff-so-fancy"
 # Pack, ship and run any application as a lightweight container
 brew "docker"
-# Modern replacement for 'ls'
-brew "exa"
 # Modern, maintained replacement for ls
 brew "eza"
 # Simple, fast and user-friendly alternative to find
@@ -172,4 +170,5 @@ vscode "vstirbu.vscode-mermaid-preview"
 vscode "yzhang.markdown-all-in-one"
 go "github.com/prometheus/alertmanager/cmd/amtool"
 npm "corepack"
+npm "npm-check"
 npm "pnpm"
