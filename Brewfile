@@ -55,6 +55,8 @@ brew "jq"
 brew "libtool"
 # YAML Parser
 brew "libyaml"
+# Mac App Store command-line interface
+brew "mas"
 # MongoDB Shell to connect, configure, query, and work with your MongoDB database
 brew "mongosh"
 # Ambitious Vim-fork focused on extensibility and agility
@@ -137,6 +139,13 @@ cask "viber"
 cask "visual-studio-code"
 # Video communication and virtual meeting platform
 cask "zoom"
+mas "Coin Tick", id: 1141688067
+mas "NordVPN", id: 905953485
+mas "Numbers", id: 409203825
+mas "Vimari", id: 1480933944
+mas "WhatsApp", id: 310633997
+mas "WireGuard", id: 1451685025
+mas "Xcode", id: 497799835
 vscode "42crunch.vscode-openapi"
 vscode "amazonwebservices.aws-toolkit-vscode"
 vscode "anthropic.claude-code"

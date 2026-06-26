@@ -53,5 +53,7 @@
     "api": "nginx"
   },
   "task.allowAutomaticTasks": "off",
-  "claudeCode.preferredLocation": "sidebar"
+  "claudeCode.preferredLocation": "sidebar",
+  "gitlens.ai.model": "vscode",
+  "gitlens.ai.vscode.model": "copilotcli:claude-haiku-4.5"
 }

@@ -12,6 +12,7 @@ log() { echo "[$(date '+%H:%M:%S')] $*"; }
 # --- Dotfiles: regenerate dynamic files ---
 log "Regenerating dynamic files..."
 brew bundle dump --file="$DOTFILES/Brewfile" --force 2>&1 || log "brew dump failed (skipping)"
+mas list > "$DOTFILES/Masfile" 2>/dev/null || log "mas list failed (skipping)"
 
 # --- Dotfiles: commit & push ---
 log "Backing up dotfiles..."
