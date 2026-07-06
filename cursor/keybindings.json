@@ -160,5 +160,13 @@
     "key": "alt+cmd+s",
     "command": "workbench.action.toggleUnifiedSidebarFromKeyboard",
     "when": "cursor.agentIdeUnification.enabled == true && !isAuxiliaryWindowFocusedContext"
+  },
+  {
+    "key": "ctrl+cmd+c",
+    "command": "copyFilePath"
+  },
+  {
+    "key": "ctrl+shift+cmd+c",
+    "command": "copyRelativeFilePath"
   }
 ]

@@ -55,5 +55,13 @@
   "task.allowAutomaticTasks": "off",
   "claudeCode.preferredLocation": "sidebar",
   "gitlens.ai.model": "vscode",
-  "gitlens.ai.vscode.model": "copilotcli:claude-haiku-4.5"
+  "gitlens.ai.vscode.model": "copilotcli:claude-haiku-4.5",
+  "yaml.disableSchemaDetection": [
+    "**/.github/workflows/*.yml",
+    "**/.github/workflows/*.yaml",
+    "**/.gitea/workflows/*.yml",
+    "**/.gitea/workflows/*.yaml",
+    "**/.forgejo/workflows/*.yml",
+    "**/.forgejo/workflows/*.yaml"
+  ]
 }

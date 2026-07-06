@@ -147,5 +147,13 @@
     "command": "workbench.action.terminal.sendSequence",
     "args": { "text": "\r" },
     "when": "terminalFocus"
+  },
+  {
+    "key": "ctrl+cmd+c",
+    "command": "copyFilePath"
+  },
+  {
+    "key": "ctrl+shift+cmd+c",
+    "command": "copyRelativeFilePath"
   }
 ]
