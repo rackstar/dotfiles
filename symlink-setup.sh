@@ -63,3 +63,7 @@ sym_link "$(pwd)/cursor/keybindings.json" "~/Library/Application\ Support/Cursor
 
 # symlink hammerspoon/init.lua
 sym_link "$(pwd)/.hammerspoon/init.lua" "~/.hammerspoon/init.lua"
+
+# symlink dotfiles-backup launchd agent
+sym_link "$(pwd)/launchd/com.rocky.dotfiles-backup.plist" "~/Library/LaunchAgents/com.rocky.dotfiles-backup.plist"
+launchctl load ~/Library/LaunchAgents/com.rocky.dotfiles-backup.plist 2>/dev/null
