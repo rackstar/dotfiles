@@ -1,6 +1,6 @@
 tap "homebrew/bundle"
 tap "homebrew/services"
-tap "mongodb/brew"
+tap "mongodb/brew", trusted: true
 tap "romkatv/powerlevel10k"
 tap "tenderly/tenderly"
 # Run your GitHub Actions locally
@@ -91,6 +91,8 @@ brew "zsh"
 brew "zsh-autosuggestions"
 # Feature-rich syntax highlighting for Zsh
 brew "zsh-fast-syntax-highlighting"
+# High-performance, schema-free, document-oriented database
+brew "mongodb/brew/mongodb-community"
 # Password manager that keeps all passwords secure behind one password
 cask "1password"
 # Command-line interface for 1Password
@@ -103,8 +105,6 @@ cask "antigravity-cli"
 cask "brave-browser"
 # Terminal-based AI coding assistant
 cask "claude-code@latest"
-# OpenAI's coding agent that runs in your terminal
-cask "codex"
 # Voice and text chat software
 cask "discord"
 # Multi-platform multi-messaging app
@@ -115,6 +115,8 @@ cask "hammerspoon"
 cask "hyperkey"
 # Terminal emulator as alternative to Apple's Terminal app
 cask "iterm2"
+# Keyboard customiser
+cask "karabiner-elements"
 # Clipboard manager
 cask "maccy"
 # Interactive tool for analyzing MongoDB data
@@ -141,7 +143,9 @@ cask "visual-studio-code"
 cask "zoom"
 mas "Coin Tick", id: 1141688067
 mas "NordVPN", id: 905953485
+mas "Numbers", id: 361304891
 mas "Numbers", id: 409203825
+mas "Speed Player", id: 1521133201
 mas "Vimari", id: 1480933944
 mas "WhatsApp", id: 310633997
 mas "WireGuard", id: 1451685025
@@ -178,6 +182,3 @@ vscode "vitaliymaz.vscode-svg-previewer"
 vscode "vstirbu.vscode-mermaid-preview"
 vscode "yzhang.markdown-all-in-one"
 go "github.com/prometheus/alertmanager/cmd/amtool"
-npm "corepack"
-npm "npm-check"
-npm "pnpm"
