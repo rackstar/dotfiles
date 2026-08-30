@@ -297,3 +297,5 @@ export PATH="$HOME/.local/bin:$PATH"
 # <<< spawn <<<
 
 source $HOME/.config/op/plugins.sh
+
+export BERYL_PASSWORD=yfBU-9tQKHzvPbe9VY2B
