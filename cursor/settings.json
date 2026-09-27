@@ -45,7 +45,6 @@
     },
     "workbench.colorTheme": "Material Theme",
     "workbench.activityBar.orientation": "vertical",
-    "workbench.statusBar.visible": false,
     "window.autoDetectColorScheme": false,
     "extensions.experimental.affinity": {
         "asvetliakov.vscode-neovim": 1
@@ -88,5 +87,6 @@
         "**/.gitea/workflows/*.yaml",
         "**/.forgejo/workflows/*.yml",
         "**/.forgejo/workflows/*.yaml"
-    ]
+    ],
+    "workbench.statusBar.visible": false
 }
