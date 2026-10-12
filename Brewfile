@@ -12,7 +12,7 @@ brew "autoconf"
 # Tool for generating GNU Standards-compliant Makefiles
 brew "automake"
 # Cryptography and SSL/TLS Toolkit
-brew "openssl@3"
+brew "openssl@3", link: true
 # Interpreted, interactive, object-oriented programming language
 brew "python@3.11"
 # Official Amazon AWS command-line interface
@@ -143,8 +143,8 @@ cask "visual-studio-code"
 cask "zoom"
 mas "Coin Tick", id: 1141688067
 mas "NordVPN", id: 905953485
-mas "Numbers", id: 409203825
 mas "Numbers", id: 361304891
+mas "Numbers", id: 409203825
 mas "Speed Player", id: 1521133201
 mas "Vimari", id: 1480933944
 mas "WhatsApp", id: 310633997

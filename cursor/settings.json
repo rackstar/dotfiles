@@ -87,6 +87,5 @@
         "**/.gitea/workflows/*.yaml",
         "**/.forgejo/workflows/*.yml",
         "**/.forgejo/workflows/*.yaml"
-    ],
-    "workbench.statusBar.visible": false
+    ]
 }
