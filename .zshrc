@@ -299,3 +299,4 @@ export PATH="$HOME/.local/bin:$PATH"
 source $HOME/.config/op/plugins.sh
 
 export BERYL_PASSWORD=yfBU-9tQKHzvPbe9VY2B
+export AWS_CA_BUNDLE="$(brew --prefix)/etc/ca-certificates/cert.pem"

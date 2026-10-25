@@ -11,10 +11,6 @@ brew "ast-grep"
 brew "autoconf"
 # Tool for generating GNU Standards-compliant Makefiles
 brew "automake"
-# Cryptography and SSL/TLS Toolkit
-brew "openssl@3", link: true
-# Interpreted, interactive, object-oriented programming language
-brew "python@3.11"
 # Official Amazon AWS command-line interface
 brew "awscli"
 # Clone of cat(1) with syntax highlighting and Git integration
@@ -37,8 +33,6 @@ brew "fnm"
 brew "fzf"
 # GitHub command-line tool
 brew "gh"
-# Validating, recursive, caching DNS resolver
-brew "unbound"
 # GNU Transport Layer Security (TLS) Library
 brew "gnutls"
 # X.509 and CMS library
@@ -75,10 +69,14 @@ brew "powerlevel10k"
 brew "prometheus"
 # Easily download, build, install, upgrade, and uninstall Python packages
 brew "python-setuptools"
+# Interpreted, interactive, object-oriented programming language
+brew "python@3.11"
 # Search tool like grep and The Silver Searcher
 brew "ripgrep"
 # Static analysis and lint tool, for (ba)sh scripts
 brew "shellcheck"
+# Validating, recursive, caching DNS resolver
+brew "unbound"
 # Tools for the WireGuard secure network tunnel
 brew "wireguard-tools"
 # General-purpose lossless data-compression library
@@ -183,3 +181,7 @@ vscode "vitaliymaz.vscode-svg-previewer"
 vscode "vstirbu.vscode-mermaid-preview"
 vscode "yzhang.markdown-all-in-one"
 go "github.com/prometheus/alertmanager/cmd/amtool"
+npm "@nexusmutual/sdk"
+npm "sol2uml"
+npm "solc"
+npm "yarn"
