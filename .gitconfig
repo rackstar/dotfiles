@@ -66,3 +66,9 @@
 	version = 2
 [http]
 	sslCAInfo = /opt/homebrew/etc/ca-certificates/cert.pem
+[credential "https://github.com"]
+	helper = 
+	helper = !/opt/homebrew/bin/gh auth git-credential
+[credential "https://gist.github.com"]
+	helper = 
+	helper = !/opt/homebrew/bin/gh auth git-credential

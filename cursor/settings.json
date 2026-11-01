@@ -1,5 +1,6 @@
 {
     "workbench.iconTheme": "material-icon-theme",
+    "extensions.autoUpdate": false,
     "[solidity]": {
         "editor.defaultFormatter": "NomicFoundation.hardhat-solidity"
     },
